@@ -1,5 +1,5 @@
-const { DataBaseModelNames } = require('../../database/constants/index');
-const Book = require('../../database/models')[DataBaseModelNames.BOOK];
+// const { DataBaseModelNames } = require('../../database/constants');
+// const Book = require('../../database/models')[DataBaseModelNames.BOOK];
 
 const bookService = {
   index: async () => {
@@ -12,7 +12,7 @@ const bookService = {
     }
   },
 
-  store: async (req) => {
+  store: async (_req) => {
     try {
       return {
         message: 'Book created successfully.',
@@ -22,7 +22,7 @@ const bookService = {
     }
   },
 
-  show: async (req) => {
+  show: async (_req) => {
     try {
       return {
         message: 'Retrieved book details Successfully.',
@@ -32,7 +32,7 @@ const bookService = {
     }
   },
 
-  update: async (req) => {
+  update: async (_req) => {
     try {
       return {
         message: 'Book updated successfully',
@@ -42,7 +42,7 @@ const bookService = {
     }
   },
 
-  delete: async (req) => {
+  delete: async (_req) => {
     try {
       return {
         message: 'Book deleted successfully',

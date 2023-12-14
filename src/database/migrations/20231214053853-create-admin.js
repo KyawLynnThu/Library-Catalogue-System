@@ -19,16 +19,22 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
       },
-      token: {
+      auth_token: {
         type: Sequelize.STRING,
       },
       account_type: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM,
+        values: ['SUPER_ADMIN', 'LIBRARIAN'],
+        defaultValue: 'LIBRARIAN',
+        allowNull: false,
       },
       account_status: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM,
+        values: ['ACTIVATED', 'DEACTIVATED'],
+        defaultValue: 'ACTIVATED',
+        allowNull: false,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },

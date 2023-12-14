@@ -1,6 +1,6 @@
 const { Op } = require('sequelize');
 
-const { DataBaseModelNames } = require('../../database/constants/index');
+const { DataBaseModelNames } = require('../../database/constants');
 const Category = require('../../database/models')[DataBaseModelNames.CATEGORY];
 
 const categoryService = {

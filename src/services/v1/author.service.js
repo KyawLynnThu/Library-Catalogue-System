@@ -1,11 +1,15 @@
-const { Op } = require('sequelize');
-
-const { DataBaseModelNames } = require('../../database/constants/index');
+const { DataBaseModelNames } = require('../../database/constants');
 const Author = require('../../database/models')[DataBaseModelNames.AUTHOR];
 
 const authorService = {
   index: async () => {
     try {
+      await Author.findAll({
+        where: { deletedAt: null, status: 1 },
+        attributes: ['id', 'categoryName', 'sort', 'status'],
+        order: [['sort', 'ASC']],
+      });
+
       return {
         message: 'Retrieved all author lists Successfully.',
       };
@@ -14,7 +18,7 @@ const authorService = {
     }
   },
 
-  store: async (req) => {
+  store: async (_req) => {
     try {
       return {
         message: 'Author created successfully',
@@ -24,7 +28,7 @@ const authorService = {
     }
   },
 
-  show: async (req) => {
+  show: async (_req) => {
     try {
       return {
         message: 'Retrieved author details successfully.',
@@ -34,7 +38,7 @@ const authorService = {
     }
   },
 
-  update: async (req) => {
+  update: async (_req) => {
     try {
       return {
         message: 'Author updated successfully',
@@ -44,7 +48,7 @@ const authorService = {
     }
   },
 
-  delete: async (req) => {
+  delete: async (_req) => {
     try {
       return {
         message: 'Author deleted successfully',

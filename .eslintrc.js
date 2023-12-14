@@ -23,7 +23,17 @@ module.exports = {
     },
     rules: {
       'prettier/prettier': 'error',
-      'no-unused-vars': 'warn',
+      'no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          args: 'after-used',
+          ignoreRestSiblings: true,
+          varsIgnorePattern: '^_',
+          argsIgnorePattern: '^_',
+        },
+      ],
+      'no-unreachable': 'off',
       'no-console': 'off',
       "import/order": [
         "error",

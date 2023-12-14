@@ -13,16 +13,16 @@ module.exports = {
       title: {
         type: Sequelize.STRING,
       },
-      authorId: {
+      category_id: {
         type: Sequelize.INTEGER,
       },
       language: {
         type: Sequelize.STRING,
       },
-      contentType: {
+      content_type: {
         type: Sequelize.STRING,
       },
-      ISBN: {
+      isbn: {
         type: Sequelize.STRING,
       },
       genre: {
