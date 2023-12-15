@@ -27,6 +27,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         as: 'member',
       });
+
+      Book.hasMany(models[DataBaseModelNames.BOOK_RESERVE], {
+        foreignKey: {
+          name: 'bookId',
+        },
+        as: 'books',
+      });
     }
   }
   Book.init(

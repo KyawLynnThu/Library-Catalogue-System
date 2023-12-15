@@ -23,6 +23,17 @@ const borrowController = {
         next(err);
       });
   },
+
+  reserveBook: async (req, res, next) => {
+    borrowService
+      .reserveBook(req)
+      .then((data) => {
+        responseMessage(res, data.message, data.data);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  },
 };
 
 module.exports = borrowController;

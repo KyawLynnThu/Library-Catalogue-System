@@ -3,6 +3,9 @@ require('dotenv').config();
 const { DataBaseModelNames } = require('../../database/constants');
 const Member = require('../../database/models')[DataBaseModelNames.MEMBER];
 const Book = require('../../database/models')[DataBaseModelNames.BOOK];
+const BookReserve = require('../../database/models')[
+  DataBaseModelNames.BOOK_RESERVE
+];
 const BorrowRecord = require('../../database/models')[
   DataBaseModelNames.BORROW_RECORD
 ];
@@ -52,7 +55,7 @@ const borrowService = {
 
       // Check Availability of books
       const books = await Book.findAll({
-        where: { id: bookIds, availability: true },
+        where: { id: bookIds, availability: true, deletedAt: null },
       });
 
       if (books.length !== bookIds.length) {
@@ -127,6 +130,53 @@ const borrowService = {
 
       return {
         message: 'Books successfully returned',
+      };
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+
+  reserveBook: async (req) => {
+    try {
+      const memberId = req.memberId;
+      const { bookIds } = req.body;
+
+      const books = await Book.findAll({
+        where: {
+          id: bookIds,
+          availability: true,
+          deletedAt: null,
+        },
+      });
+
+      if (books.length !== bookIds.length) {
+        throw new Error(
+          'One or more books not found or are not available for reservation',
+        );
+      }
+
+      // Check if the user has already reserved any of the requested books
+      const existingReservations = await BookReserve.findAll({
+        where: { memberId, bookId: bookIds, isAvailable: false },
+      });
+
+      if (existingReservations.length > 0) {
+        throw new Error(
+          'User has already reserved one or more of the requested books',
+        );
+      }
+
+      // Create reservation records for each book
+      const reservationRecords = bookIds.map((bookId) => ({
+        memberId,
+        bookId: bookId,
+        isAvailable: false, // Mark the books as reserved
+      }));
+
+      await BookReserve.bulkCreate(reservationRecords);
+
+      return {
+        message: 'Books successfully reserved.',
       };
     } catch (error) {
       throw new Error(error);

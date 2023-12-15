@@ -7,37 +7,6 @@ const { DataBaseModelNames } = require('../../database/constants');
 const Member = require('../../database/models')[DataBaseModelNames.MEMBER];
 
 const memberService = {
-  registerByAdmin: async (req) => {
-    try {
-      const { firstName, lastName, email, password, address, phone, dob } =
-        req.body;
-
-      const formattedBirthDate = dayjs(dob).format('YYYY-MM-DD');
-
-      const member = await Member.create({
-        firstName,
-        lastName,
-        email,
-        password: bcrypt.hashSync(password, 8),
-        address,
-        phone,
-        dob: formattedBirthDate,
-        accountStatus: 'ACTIVATED',
-      });
-
-      if (!member) {
-        throw new Error('Failed to create member');
-      }
-
-      return {
-        message: 'Member created successfully',
-        data: member,
-      };
-    } catch (error) {
-      throw new Error(error);
-    }
-  },
-
   approvedByAdmin: async (req) => {
     try {
       const memberId = req.params.memberId;

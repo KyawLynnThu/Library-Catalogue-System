@@ -1,21 +1,27 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
+
 const { DataBaseTableNames } = require('../constants');
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable(DataBaseTableNames.CATEGORY, {
+    await queryInterface.createTable(DataBaseTableNames.BOOK_RESERVE, {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      category_name: {
-        type: Sequelize.STRING,
+      member_id: {
+        type: Sequelize.INTEGER,
       },
-      status: {
+      book_id: {
+        type: Sequelize.INTEGER,
+      },
+      reservation_date: {
+        type: Sequelize.DATE,
+      },
+      is_available: {
         type: Sequelize.BOOLEAN,
-        defaultValue: 1,
       },
       created_at: {
         allowNull: false,
@@ -25,13 +31,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      deleted_at: {
-        allowNull: true,
-        type: Sequelize.DATE,
-      },
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable(DataBaseTableNames.CATEGORY);
+    await queryInterface.dropTable(DataBaseTableNames.BOOK_RESERVE);
   },
 };

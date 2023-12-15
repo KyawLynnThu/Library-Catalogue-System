@@ -28,7 +28,9 @@ module.exports = async (req, _res, next) => {
         throw error;
       }
 
-      const admin = await Admin.findByPk(decoded.id);
+      const admin = await Admin.findByPk(decoded.id, {
+        where: { deletedAt: null, accountStatus: 'ACTIVATED' },
+      });
       if (!admin) {
         const error = new Error('Admin not found!');
         error.statusCode = 403;

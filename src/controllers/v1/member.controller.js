@@ -2,17 +2,6 @@ const responseMessage = require('../../helpers/response-msg.helper');
 const memberService = require('../../services/v1/member.service');
 
 const memberController = {
-  registerByAdmin: async (req, res, next) => {
-    memberService
-      .registerByAdmin(req)
-      .then((data) => {
-        responseMessage(res, data.message, data.data);
-      })
-      .catch((err) => {
-        next(err);
-      });
-  },
-
   approvedByAdmin: async (req, res, next) => {
     memberService
       .approvedByAdmin(req)

@@ -15,7 +15,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: {
           name: 'memberId',
         },
-        as: 'member',
+        as: 'borrowRecords',
+      });
+
+      Member.hasMany(models[DataBaseModelNames.BOOK_RESERVE], {
+        foreignKey: {
+          name: 'memberId',
+        },
+        as: 'bookReservation',
       });
     }
   }
