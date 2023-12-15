@@ -30,9 +30,6 @@ module.exports = {
       isbn: {
         type: Sequelize.STRING,
       },
-      genre: {
-        type: Sequelize.STRING,
-      },
       publisher: {
         type: Sequelize.STRING,
       },

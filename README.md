@@ -39,6 +39,9 @@ This document outlines the API endpoints available in the application.
 - `/api/v1/admin/borrow/:memberId/return`: Returning books by a member
 - `/api/v1/admin/user/:memberId/approve`: Approving a user
 - `/api/v1/admin/user/:memberId/reject`: Rejecting a user
+- `/api/v1/admin/user/`: User Lists
+- `/api/v1/admin/user/:memberId`: User Details
+
 
 ## User Related Endpoints
 

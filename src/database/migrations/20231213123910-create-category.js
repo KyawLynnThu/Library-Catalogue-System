@@ -13,10 +13,6 @@ module.exports = {
       category_name: {
         type: Sequelize.STRING,
       },
-      status: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: 1,
-      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,

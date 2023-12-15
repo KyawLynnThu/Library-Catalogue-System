@@ -44,7 +44,6 @@ module.exports = (sequelize, DataTypes) => {
       language: DataTypes.STRING,
       contentType: DataTypes.STRING,
       isbn: DataTypes.STRING,
-      genre: DataTypes.STRING,
       publisher: DataTypes.STRING,
       publicationDate: DataTypes.DATE,
       coverImage: DataTypes.STRING,

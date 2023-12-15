@@ -7,8 +7,8 @@ const categoryService = {
   index: async () => {
     try {
       const categories = await Category.findAll({
-        where: { deletedAt: null, status: 1 },
-        attributes: ['id', 'categoryName', 'status'],
+        where: { deletedAt: null },
+        attributes: ['id', 'categoryName'],
         order: [['categoryName', 'ASC']],
       });
 
@@ -23,11 +23,10 @@ const categoryService = {
 
   store: async (req) => {
     try {
-      const { categoryName, status } = req.body;
+      const { categoryName } = req.body;
 
       const category = await Category.create({
         categoryName,
-        status,
       });
 
       if (!category) {
@@ -46,8 +45,8 @@ const categoryService = {
   show: async (req) => {
     try {
       const category = await Category.findByPk(req.params.id, {
-        where: { deletedAt: null, status: 1 },
-        attributes: ['id', 'categoryName', 'status'],
+        where: { deletedAt: null },
+        attributes: ['id', 'categoryName'],
       });
 
       if (!category) {
@@ -65,7 +64,7 @@ const categoryService = {
 
   update: async (req) => {
     try {
-      const { categoryName, status } = req.body;
+      const { categoryName } = req.body;
       const categoryId = req.params.id;
 
       const category = await Category.findByPk(categoryId, {
@@ -94,7 +93,6 @@ const categoryService = {
 
       const updatedCategory = await category.update({
         categoryName,
-        status,
       });
 
       if (!updatedCategory) {
