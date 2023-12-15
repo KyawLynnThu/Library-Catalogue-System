@@ -1,19 +1,43 @@
 const dayjs = require('dayjs');
+const { Op } = require('sequelize');
 
 const { DataBaseModelNames } = require('../../database/constants');
 const Author = require('../../database/models')[DataBaseModelNames.AUTHOR];
 
 const authorService = {
-  index: async () => {
+  index: async (req) => {
     try {
-      const authors = await Author.findAll({
-        where: { deletedAt: null },
+      console.log(typeof req.query.page);
+      const page = parseInt(req.query.page, 10) || 1;
+      const pageSize = parseInt(req.query.pageSize, 10) || 10;
+      const keyword = req.query.keyword;
+
+      const offset = (page - 1) * pageSize;
+
+      let whereCondition = { deletedAt: null };
+      if (keyword) {
+        whereCondition = {
+          ...whereCondition,
+          authorName: { [Op.like]: `%${keyword}%` },
+        };
+      }
+
+      const authors = await Author.findAndCountAll({
+        where: whereCondition,
         attributes: ['id', 'authorName', 'birthDate', 'biography'],
+        limit: pageSize,
+        offset: offset,
       });
+
+      const totalPages = Math.ceil(authors.count / pageSize);
 
       return {
         message: 'Retrieved all author lists Successfully.',
-        data: authors,
+        currentPage: page,
+        totalPages: totalPages,
+        pageSize: pageSize,
+        totalCounts: authors.count,
+        data: authors.rows,
       };
     } catch (error) {
       throw new Error(error);

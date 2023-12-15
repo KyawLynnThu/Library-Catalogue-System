@@ -83,7 +83,7 @@ const categoryService = {
             {
               categoryName,
             },
-            { id: { [Op.ne]: categoryId } }, // Exclude current category ID from the check
+            { id: { [Op.ne]: categoryId } },
             { deletedAt: null },
           ],
         },
