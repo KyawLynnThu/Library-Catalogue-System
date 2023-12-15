@@ -18,9 +18,6 @@ const bookSchema = {
     isbn: {
       notEmpty: { errorMessage: 'ISBN is required.' },
     },
-    genre: {
-      notEmpty: { errorMessage: 'Genre field is required.' },
-    },
     publisher: {
       notEmpty: { errorMessage: 'Publisher name field is required.' },
     },

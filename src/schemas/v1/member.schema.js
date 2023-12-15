@@ -4,10 +4,10 @@ const Member = require('../../database/models')[DataBaseModelNames.MEMBER];
 const memberSchema = {
   register: {
     firstName: {
-      notEmpty: { errorMessage: 'Author name field is required.' },
+      notEmpty: { errorMessage: 'Fist name field is required.' },
     },
     lastName: {
-      notEmpty: { errorMessage: 'Author name field is required.' },
+      notEmpty: { errorMessage: 'Last name field is required.' },
     },
     email: {
       notEmpty: { errorMessage: 'Email field is required.' },
@@ -45,6 +45,15 @@ const memberSchema = {
     },
     phone: {
       notEmpty: { errorMessage: 'Phone field is required.' },
+      custom: {
+        options: (value) => {
+          return Member.findOne({ where: { phone: value } }).then((member) => {
+            if (member) {
+              throw new Error('Phone Number already in used.');
+            }
+          });
+        },
+      },
     },
     dob: {
       notEmpty: { errorMessage: 'Date of Birth field is required.' },

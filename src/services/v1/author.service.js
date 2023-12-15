@@ -7,7 +7,6 @@ const Author = require('../../database/models')[DataBaseModelNames.AUTHOR];
 const authorService = {
   index: async (req) => {
     try {
-      console.log(typeof req.query.page);
       const page = parseInt(req.query.page, 10) || 1;
       const pageSize = parseInt(req.query.pageSize, 10) || 10;
       const keyword = req.query.keyword;
@@ -80,7 +79,6 @@ const authorService = {
       }
 
       return {
-        status: 200,
         message: 'Retrieved author details successfully.',
         data: author,
       };
@@ -113,7 +111,6 @@ const authorService = {
       }
 
       return {
-        status: 200,
         message: 'Author updated successfully',
         data: updatedCategory,
       };

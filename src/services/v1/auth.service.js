@@ -65,7 +65,6 @@ const authService = {
     await authService.updateAdminAuthToken(admin, null);
 
     return {
-      status: 200,
       message: 'Logout Successfully',
     };
   },

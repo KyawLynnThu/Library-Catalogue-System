@@ -2,6 +2,36 @@ const responseMessage = require('../../helpers/response-msg.helper');
 const memberService = require('../../services/v1/member.service');
 
 const memberController = {
+  memberLists: async (req, res, next) => {
+    memberService
+      .memberLists(req)
+      .then((data) => {
+        responseMessage(
+          res,
+          data.message,
+          data.data,
+          data.currentPage,
+          data.totalPages,
+          data.pageSize,
+          data.totalCounts,
+        );
+      })
+      .catch((err) => {
+        next(err);
+      });
+  },
+
+  memberDetails: async (req, res, next) => {
+    memberService
+      .memberDetails(req)
+      .then((data) => {
+        responseMessage(res, data.message, data.data);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  },
+
   approvedByAdmin: async (req, res, next) => {
     memberService
       .approvedByAdmin(req)

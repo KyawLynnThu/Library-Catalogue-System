@@ -55,7 +55,6 @@ const categoryService = {
       }
 
       return {
-        status: 200,
         message: 'Retrieved Category Details Successfully.',
         data: category,
       };
@@ -102,7 +101,6 @@ const categoryService = {
         throw new Error('Failed to update category');
       }
       return {
-        status: 200,
         message: 'Category updated successfully',
         data: updatedCategory,
       };

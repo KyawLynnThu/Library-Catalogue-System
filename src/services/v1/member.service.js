@@ -2,11 +2,93 @@ const bcrypt = require('bcrypt');
 const dayjs = require('dayjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const { Op } = require('sequelize');
 
 const { DataBaseModelNames } = require('../../database/constants');
 const Member = require('../../database/models')[DataBaseModelNames.MEMBER];
 
 const memberService = {
+  memberLists: async (req) => {
+    try {
+      const page = parseInt(req.query.page, 10) || 1;
+      const pageSize = parseInt(req.query.pageSize, 10) || 10;
+      const keyword = req.query.keyword;
+
+      const offset = (page - 1) * pageSize;
+
+      let whereCondition = { deletedAt: null };
+      if (keyword) {
+        whereCondition = {
+          deletedAt: null,
+          [Op.or]: [
+            { firstName: { [Op.like]: `%${keyword}%` } },
+            { lastName: { [Op.like]: `%${keyword}%` } },
+            { email: { [Op.like]: `%${keyword}%` } },
+            { phone: { [Op.like]: `%${keyword}%` } },
+          ],
+        };
+      }
+
+      const members = await Member.findAndCountAll({
+        where: whereCondition,
+        attributes: [
+          'id',
+          'firstName',
+          'lastName',
+          'email',
+          'phone',
+          'accountStatus',
+          'createdAt',
+        ],
+        limit: pageSize,
+        offset: offset,
+      });
+
+      const totalPages = Math.ceil(members.count / pageSize);
+
+      return {
+        message: 'Retrieved all member lists Successfully.',
+        currentPage: page,
+        totalPages: totalPages,
+        pageSize: pageSize,
+        totalCounts: members.count,
+        data: members.rows,
+      };
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+
+  memberDetails: async (req) => {
+    try {
+      const member = await Member.findByPk(req.params.memberId, {
+        where: { deletedAt: null },
+        attributes: [
+          'id',
+          'firstName',
+          'lastName',
+          'email',
+          'phone',
+          'address',
+          'dob',
+          'accountStatus',
+          'createdAt',
+        ],
+      });
+
+      if (!member) {
+        throw new Error('User Not Found.');
+      }
+
+      return {
+        message: 'Retrieved user details successfully.',
+        data: member,
+      };
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+
   approvedByAdmin: async (req) => {
     try {
       const memberId = req.params.memberId;
@@ -15,13 +97,14 @@ const memberService = {
         where: { deletedAt: null },
       });
 
-      if (member) {
+      if (!member) {
         throw new Error('User Not Found!');
       }
 
-      const result = await member.update({
-        where: { accountStatus: 'ACTIVATED' },
-      });
+      const result = await member.update(
+        { accountStatus: 'ACTIVATED' },
+        { where: { id: memberId } },
+      );
 
       return {
         message: 'Admin Approved Successfully.',
@@ -35,11 +118,15 @@ const memberService = {
   rejectedByAdmin: async (req) => {
     try {
       const memberId = req.params.memberId;
-      const member = await Member.findByPk(memberId, {
-        where: { deletedAt: null },
+      const member = await Member.findOne({
+        where: {
+          id: memberId,
+          accountStatus: 'PENDING',
+          deletedAt: null,
+        },
       });
 
-      if (member) {
+      if (!member) {
         throw new Error('User Not Found!');
       }
 
@@ -121,7 +208,7 @@ const memberService = {
       }
 
       const memberData = await Member.findByPk(member.id, {
-        attributes: ['fistName', 'lastName', 'email', 'phone', 'authToken'],
+        attributes: ['firstName', 'lastName', 'email', 'phone', 'authToken'],
       });
 
       return {
@@ -143,7 +230,6 @@ const memberService = {
     await memberService.updateUserAuthToken(member, null);
 
     return {
-      status: 200,
       message: 'Logout Successfully',
     };
   },

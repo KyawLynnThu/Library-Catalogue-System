@@ -134,6 +134,18 @@ const bookService = {
     try {
       const book = await Book.findByPk(req.params.id, {
         where: { deletedAt: null },
+        include: [
+          {
+            model: Category,
+            as: 'category',
+            attributes: ['id', 'categoryName'],
+          },
+          {
+            model: Author,
+            as: 'author',
+            attributes: ['id', 'authorName'],
+          },
+        ],
       });
       if (!book) throw new Error('Book Not Found');
 
