@@ -2,9 +2,17 @@
 const { Model } = require('sequelize');
 
 const { DataBaseModelNames } = require('../constants');
+
 module.exports = (sequelize, DataTypes) => {
   class Author extends Model {
-    static associate() {}
+    static associate(models) {
+      Author.hasMany(models[DataBaseModelNames.BOOK], {
+        foreignKey: {
+          name: 'authorId',
+        },
+        as: 'books',
+      });
+    }
   }
   Author.init(
     {

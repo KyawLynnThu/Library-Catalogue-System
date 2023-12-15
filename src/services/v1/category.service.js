@@ -37,6 +37,7 @@ const categoryService = {
 
       return {
         message: 'Category created successfully',
+        data: category,
       };
     } catch (error) {
       throw new Error(error);

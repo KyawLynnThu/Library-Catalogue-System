@@ -15,6 +15,11 @@ module.exports = {
       },
       category_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      author_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       language: {
         type: Sequelize.STRING,
@@ -33,6 +38,9 @@ module.exports = {
       },
       publication_date: {
         type: Sequelize.DATE,
+      },
+      cover_image: {
+        type: Sequelize.STRING,
       },
       cover_image_url: {
         type: Sequelize.STRING,

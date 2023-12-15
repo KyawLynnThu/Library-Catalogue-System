@@ -12,18 +12,28 @@ module.exports = (sequelize, DataTypes) => {
         },
         as: 'category',
       });
+
+      Book.belongsTo(models[DataBaseModelNames.AUTHOR], {
+        foreignKey: {
+          name: 'authorId',
+          allowNull: false,
+        },
+        as: 'author',
+      });
     }
   }
   Book.init(
     {
       title: DataTypes.STRING,
       categoryId: DataTypes.INTEGER,
+      authorId: DataTypes.INTEGER,
       language: DataTypes.STRING,
       contentType: DataTypes.STRING,
-      ISBN: DataTypes.STRING,
+      isbn: DataTypes.STRING,
       genre: DataTypes.STRING,
       publisher: DataTypes.STRING,
       publicationDate: DataTypes.DATE,
+      coverImage: DataTypes.STRING,
       coverImageUrl: DataTypes.STRING,
       summary: DataTypes.TEXT,
       edition: DataTypes.STRING,
