@@ -9,7 +9,7 @@ module.exports = async (req, _res, next) => {
     const token = req.headers['authorization'];
 
     if (!token || !token.startsWith('Bearer ')) {
-      const error = new Error('Token not present or invalid format!');
+      const error = new Error('Please Login.');
       error.statusCode = 401;
       throw error;
     }

@@ -1,13 +1,9 @@
 const router = require('express').Router();
 
-const authRoute = require('./auth.router');
-const authorRoute = require('./author.router');
-const bookRoute = require('./book.router');
-const categoryRoute = require('./category.router');
+const adminRoute = require('./admin');
+const memberRoute = require('./member.router');
 
-router.use('/auth/admin', authRoute);
-router.use('/categories', categoryRoute);
-router.use('/authors', authorRoute);
-router.use('/books', bookRoute);
+router.use('/admin', adminRoute);
+router.use('/member', memberRoute);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-const authorController = require('../../controllers/v1/author.controller');
-const adminAuthMiddleware = require('../../middlewares/admin-auth.middleware');
+const authorController = require('../../../controllers/v1/author.controller');
+const adminAuthMiddleware = require('../../../middlewares/admin-auth.middleware');
 
 router
   .route('/')

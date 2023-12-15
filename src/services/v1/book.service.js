@@ -13,6 +13,18 @@ const bookService = {
     try {
       const books = await Book.findAll({
         where: { deletedAt: null },
+        include: [
+          {
+            model: Category,
+            as: 'category',
+            attributes: ['id', 'categoryName'],
+          },
+          {
+            model: Author,
+            as: 'author',
+            attributes: ['id', 'authorName'],
+          },
+        ],
       });
       return {
         message: 'Retrieved all book lists successfully.',

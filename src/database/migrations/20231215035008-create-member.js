@@ -3,60 +3,42 @@
 const { DataBaseTableNames } = require('../constants');
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable(DataBaseTableNames.BOOK, {
+    await queryInterface.createTable(DataBaseTableNames.MEMBER, {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      title: {
+      first_name: {
         type: Sequelize.STRING,
       },
-      category_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      author_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      language: {
+      last_name: {
         type: Sequelize.STRING,
       },
-      content_type: {
+      email: {
+        type: Sequelize.STRING,
+        unique: true,
+      },
+      password: {
         type: Sequelize.STRING,
       },
-      isbn: {
-        type: Sequelize.STRING,
-      },
-      genre: {
-        type: Sequelize.STRING,
-      },
-      publisher: {
-        type: Sequelize.STRING,
-      },
-      publication_date: {
-        type: Sequelize.DATE,
-      },
-      cover_image: {
-        type: Sequelize.STRING,
-      },
-      cover_image_url: {
-        type: Sequelize.STRING,
-      },
-      summary: {
+      address: {
         type: Sequelize.TEXT,
       },
-      edition: {
+      phone: {
         type: Sequelize.STRING,
       },
-      total_pages: {
-        type: Sequelize.INTEGER,
+      dob: {
+        type: Sequelize.DATE,
       },
-      availability: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: 1,
+      account_status: {
+        type: Sequelize.ENUM,
+        values: ['PENDING', 'ACTIVATED', 'DEACTIVATED'],
+        allowNull: false,
+      },
+      auth_token: {
+        type: Sequelize.STRING,
       },
       created_at: {
         allowNull: false,
@@ -73,6 +55,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable(DataBaseTableNames.BOOK);
+    await queryInterface.dropTable(DataBaseTableNames.MEMBER);
   },
 };

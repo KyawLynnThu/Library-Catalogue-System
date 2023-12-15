@@ -20,6 +20,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         as: 'author',
       });
+
+      Book.hasMany(models[DataBaseModelNames.BORROW_RECORD], {
+        foreignKey: {
+          name: 'memberId',
+        },
+        as: 'member',
+      });
     }
   }
   Book.init(
@@ -38,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       summary: DataTypes.TEXT,
       edition: DataTypes.STRING,
       totalPages: DataTypes.INTEGER,
+      availability: DataTypes.BOOLEAN,
     },
     {
       sequelize,

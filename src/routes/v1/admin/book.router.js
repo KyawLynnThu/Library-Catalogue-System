@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-const bookController = require('../../controllers/v1/book.controller');
-const uploadFileMiddleware = require('../../middlewares/upload-file.middleware');
+const bookController = require('../../../controllers/v1/book.controller');
+const uploadFileMiddleware = require('../../../middlewares/upload-file.middleware');
 
 router
   .route('/')
