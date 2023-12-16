@@ -1,0 +1,3224 @@
+{
+	"info": {
+		"_postman_id": "55682f2e-a3be-45f1-80a7-c3d96e5a99ba",
+		"name": "Library Catalogue System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16729355"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"superadmin@gmail.com\",\r\n    \"password\": \"@dminPass123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"superadmin@gmail.com\",\r\n    \"password\": \"@dminPass123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "264"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"108-N6uI1JEfGLcT4M0dlmM2ri+p7U8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 17:31:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Log In successfully.\",\n    \"data\": {\n        \"name\": \"Super Admin\",\n        \"email\": \"superadmin@gmail.com\",\n        \"authToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjYxNTAwLCJleHAiOjE3MDI3NDc5MDB9.3dndwcSc3uU7D6Q59j6pxigD1zPTr7uzc9opq2wWYIU\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/logout",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-rMlterJFLJf2V1pdg/rgf61eiKg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 17:31:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Logout Successfully\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Categories Lists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/categories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Categories Lists(Order By A-Z)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/categories",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "285"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"11d-l8bZnp0UL1KvKqNhCwnNr3wkcgA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 17:39:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Retrieved All Category Lists Successfully.\",\n    \"data\": [\n        {\n            \"id\": 3,\n            \"categoryName\": \"Astrology\",\n            \"status\": true\n        },\n        {\n            \"id\": 4,\n            \"categoryName\": \"Computer Science\",\n            \"status\": true\n        },\n        {\n            \"id\": 2,\n            \"categoryName\": \"History\",\n            \"status\": true\n        },\n        {\n            \"id\": 1,\n            \"categoryName\": \"Science\",\n            \"status\": true\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryName\": \"Computer Science\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/categories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryName\": \"Computer Science\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/categories",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "189"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bd-9AUa1LrkfQkxi2ZRm4kLJQEY2mg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 21:10:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Category created successfully\",\n    \"data\": {\n        \"id\": 10,\n        \"categoryName\": \"Computer Science\",\n        \"updatedAt\": \"2023-12-15T21:10:50.967Z\",\n        \"createdAt\": \"2023-12-15T21:10:50.967Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Category Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/categories/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Category Details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/categories/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "126"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7e-k6DgyMmRD0twv4zQGaXYwc0zopM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 17:37:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Retrieved Category Details Successfully.\",\n    \"data\": {\n        \"id\": 1,\n        \"categoryName\": \"Science\",\n        \"status\": true\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryName\": \"Self-Help\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/categories/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"categories",
+								"10"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Category",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryName\": \"Self-Help\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/categories/10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										"10"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "199"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c7-rE861voS6IKZ1aFUq2zjicxkBjs\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 21:12:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Category updated successfully\",\n    \"data\": {\n        \"id\": 10,\n        \"categoryName\": \"Self-Help\",\n        \"createdAt\": \"2023-12-15T21:10:50.000Z\",\n        \"updatedAt\": \"2023-12-15T21:12:04.166Z\",\n        \"deletedAt\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/categories/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"categories",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Category",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/categories/4",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-TMrEBxo758zK+LoAMCfIYErZpj8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 17:44:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Category deleted successfully\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Authors",
+			"item": [
+				{
+					"name": "Author Lists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/authors?page=1&pageSize=3&keyword=john",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"authors"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "keyword",
+									"value": "john"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Author Lists",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/authors?page=1&pageSize=3&keyword=john",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"authors"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "3"
+										},
+										{
+											"key": "keyword",
+											"value": "john"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "600"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"258-gTsVPwQYfMDkPlLvF3ORFKfpa3Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 21:12:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Retrieved all author lists Successfully.\",\n    \"currentPage\": 1,\n    \"totalPages\": 1,\n    \"pageSize\": 3,\n    \"totalCounts\": 2,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"authorName\": \"John Doe\",\n            \"birthDate\": \"1985-07-12T00:00:00.000Z\",\n            \"biography\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id eros id quam tristique euismod eget sed dui.\"\n        },\n        {\n            \"id\": 3,\n            \"authorName\": \"Emily Johnson\",\n            \"birthDate\": \"1992-11-08T00:00:00.000Z\",\n            \"biography\": \"Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla facilisi. Integer euismod suscipit mi, in bibendum nulla tempus sit amet.\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Author",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "authorName",
+									"value": "Author Seven",
+									"type": "text"
+								},
+								{
+									"key": "birthDate",
+									"value": "1999-03-29",
+									"type": "text"
+								},
+								{
+									"key": "biography",
+									"value": "Author Bio",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/authors",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"authors"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Author",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "authorName",
+											"value": "Author One",
+											"type": "text"
+										},
+										{
+											"key": "birthDate",
+											"value": "1999-03-29",
+											"type": "text"
+										},
+										{
+											"key": "biography",
+											"value": "Author Bio",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/authors",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"authors"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "242"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f2-h9t41dsPxrNj8ZMqEZOrY0GtiW4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 17:47:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Author created successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"authorName\": \"Author One\",\n        \"birthDate\": \"1999-03-29T00:00:00.000Z\",\n        \"biography\": \"Author Bio\",\n        \"updatedAt\": \"2023-12-15T17:47:24.433Z\",\n        \"createdAt\": \"2023-12-15T17:47:24.433Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Author Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/authors/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"authors",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Author Details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/authors/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"authors",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "175"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"af-Zz8WsAjFCqHW27V9wkppd9PgblQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 17:53:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Retrieved author details successfully.\",\n    \"data\": {\n        \"id\": 2,\n        \"authorName\": \"Author Two\",\n        \"birthDate\": \"1999-03-29T00:00:00.000Z\",\n        \"biography\": \"Author Bio\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Author",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "authorName",
+									"value": "One One",
+									"type": "text"
+								},
+								{
+									"key": "birthDate",
+									"value": "2002-11-01",
+									"type": "text"
+								},
+								{
+									"key": "biography",
+									"value": "Author Two bio",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/authors/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"authors",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Author",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "authorName",
+											"value": "One One",
+											"type": "text"
+										},
+										{
+											"key": "birthDate",
+											"value": "2002-11-01",
+											"type": "text"
+										},
+										{
+											"key": "biography",
+											"value": "Author Two bio",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/authors/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"authors",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "260"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"104-ynKDOx0usBOdl+DMFIMYPymfTnc\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 17:55:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Author updated successfully\",\n    \"data\": {\n        \"id\": 2,\n        \"authorName\": \"One One\",\n        \"birthDate\": \"2002-11-01T00:00:00.000Z\",\n        \"biography\": \"Author Two bio\",\n        \"createdAt\": \"2023-12-15T17:48:01.000Z\",\n        \"updatedAt\": \"2023-12-15T17:55:03.378Z\",\n        \"deletedAt\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Author",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/authors/7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"authors",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Author",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/authors/7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"authors",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3a-KKy0ujYaPIHUSaqtiVotCbCxCmw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 17:56:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Author deleted successfully\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Book Lists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/books?keyword=the&book=vol&author=on&category=horror&catalogueId=2&page=1&pageSize=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"books"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "the"
+								},
+								{
+									"key": "book",
+									"value": "vol"
+								},
+								{
+									"key": "author",
+									"value": "on"
+								},
+								{
+									"key": "category",
+									"value": "horror"
+								},
+								{
+									"key": "catalogueId",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Book Lists",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/books?keyword=the&book=vol&author=on&category=horror&catalogueId=2&page=1&pageSize=2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"books"
+									],
+									"query": [
+										{
+											"key": "keyword",
+											"value": "the"
+										},
+										{
+											"key": "book",
+											"value": "vol"
+										},
+										{
+											"key": "author",
+											"value": "on"
+										},
+										{
+											"key": "category",
+											"value": "horror"
+										},
+										{
+											"key": "catalogueId",
+											"value": "2"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "334"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14e-b4eAEn5d7QLLgQcvmIdDiKxWoq8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 16 Dec 2023 06:42:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Retrieved all book lists successfully.\",\n    \"currentPage\": 1,\n    \"totalPages\": 1,\n    \"pageSize\": 2,\n    \"totalCounts\": 1,\n    \"data\": [\n        {\n            \"bookId\": 8,\n            \"bookTitle\": \"The Hunger Games Vol.2\",\n            \"cover_image_url\": null,\n            \"availability\": 1,\n            \"isbn\": \"9780439023721\",\n            \"categoryId\": 2,\n            \"category_name\": \"Horror\",\n            \"authorId\": 6,\n            \"author_name\": \"Daniel Wilson\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Book Three",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "authorId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "language",
+									"value": "English",
+									"type": "text"
+								},
+								{
+									"key": "contentType",
+									"value": "text",
+									"type": "text"
+								},
+								{
+									"key": "isbn",
+									"value": "978-3-16-148410-0",
+									"type": "text"
+								},
+								{
+									"key": "publisher",
+									"value": "Publisher One",
+									"type": "text"
+								},
+								{
+									"key": "publicationDate",
+									"value": "2007-08-22",
+									"type": "text"
+								},
+								{
+									"key": "summary",
+									"value": "Summary Book",
+									"type": "text"
+								},
+								{
+									"key": "edition",
+									"value": "1st Edition",
+									"type": "text"
+								},
+								{
+									"key": "totalPages",
+									"value": "111",
+									"type": "text"
+								},
+								{
+									"key": "book_cover",
+									"type": "file",
+									"src": "/C:/Users/Work/Pictures/basic_camping_package.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/books",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"books"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Book",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Book Two",
+											"type": "text"
+										},
+										{
+											"key": "categoryId",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "language",
+											"value": "English",
+											"type": "text"
+										},
+										{
+											"key": "contentType",
+											"value": "text",
+											"type": "text"
+										},
+										{
+											"key": "isbn",
+											"value": "978-3-16-148410-0",
+											"type": "text"
+										},
+										{
+											"key": "publisher",
+											"value": "Publisher One",
+											"type": "text"
+										},
+										{
+											"key": "publicationDate",
+											"value": "2007-08-22",
+											"type": "text"
+										},
+										{
+											"key": "summary",
+											"value": "Summary Book",
+											"type": "text"
+										},
+										{
+											"key": "edition",
+											"value": "1st Edition",
+											"type": "text"
+										},
+										{
+											"key": "totalPages",
+											"value": "111",
+											"type": "text"
+										},
+										{
+											"key": "book_cover",
+											"type": "file",
+											"src": "/C:/Users/Work/Pictures/basic_camping_package.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/books",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"books"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "695"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b7-yb9ZlrYn/8+2zJrlPDipPE4SEqQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 21:16:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Book created successfully.\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Book Two\",\n        \"categoryId\": \"1\",\n        \"authorId\": \"1\",\n        \"language\": \"English\",\n        \"contentType\": \"text\",\n        \"isbn\": \"978-3-16-148410-0\",\n        \"publisher\": \"Publisher One\",\n        \"publicationDate\": \"2007-08-22T00:00:00.000Z\",\n        \"coverImage\": \"public/uploads/books/covers/07e0ff65-d898-4e0c-aabf-fb3d42721a86-basic_camping_package.png\",\n        \"coverImageUrl\": \"https://s3-library-catalogue-system.s3.ap-southeast-1.amazonaws.com/public/uploads/books/covers/07e0ff65-d898-4e0c-aabf-fb3d42721a86-basic_camping_package.png\",\n        \"summary\": \"Summary Book\",\n        \"edition\": \"1st Edition\",\n        \"totalPages\": \"111\",\n        \"updatedAt\": \"2023-12-15T21:16:30.797Z\",\n        \"createdAt\": \"2023-12-15T21:16:30.797Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Book Detais",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/books/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Book Detais",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/books/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"books",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "840"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"348-vwsl8ICFngvxixrqrB5BnvSoE6E\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 18:22:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Retrieved book details Successfully.\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Book One\",\n        \"categoryId\": 1,\n        \"authorId\": 1,\n        \"language\": \"English\",\n        \"contentType\": \"text\",\n        \"isbn\": \"978-3-16-148410-0\",\n        \"genre\": \"text\",\n        \"publisher\": \"Publisher One\",\n        \"publicationDate\": \"2007-08-22T00:00:00.000Z\",\n        \"coverImage\": \"public/uploads/books/covers/68cc2c15-2373-47fd-9db0-a1ccb5bdd300-basic_camping_package.png\",\n        \"coverImageUrl\": \"https://s3-library-catalogue-system.s3.ap-southeast-1.amazonaws.com/public/uploads/books/covers/68cc2c15-2373-47fd-9db0-a1ccb5bdd300-basic_camping_package.png\",\n        \"summary\": \"Summary Book\",\n        \"edition\": \"1st Edition\",\n        \"totalPages\": 111,\n        \"availability\": true,\n        \"createdAt\": \"2023-12-15T18:18:15.000Z\",\n        \"updatedAt\": \"2023-12-15T18:18:15.000Z\",\n        \"deletedAt\": null,\n        \"category\": {\n            \"id\": 1,\n            \"categoryName\": \"Science\"\n        },\n        \"author\": {\n            \"id\": 1,\n            \"authorName\": \"Author One\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Book",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Book One eddit",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "authorId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "language",
+									"value": "Chinese",
+									"type": "text"
+								},
+								{
+									"key": "contentType",
+									"value": "text",
+									"type": "text"
+								},
+								{
+									"key": "isbn",
+									"value": "feofdrgp243545",
+									"type": "text"
+								},
+								{
+									"key": "publisher",
+									"value": "dgsdgs",
+									"type": "text"
+								},
+								{
+									"key": "publicationDate",
+									"value": "1999-08-22",
+									"type": "text"
+								},
+								{
+									"key": "summary",
+									"value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+									"type": "text"
+								},
+								{
+									"key": "edition",
+									"value": "1st Edition",
+									"type": "text"
+								},
+								{
+									"key": "totalPages",
+									"value": "111",
+									"type": "text"
+								},
+								{
+									"key": "book_cover",
+									"type": "file",
+									"src": "/C:/Users/Work/Pictures/bg03.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/books/11",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"books",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Book",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Book One eddit",
+											"type": "text"
+										},
+										{
+											"key": "categoryId",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "language",
+											"value": "Chinese",
+											"type": "text"
+										},
+										{
+											"key": "contentType",
+											"value": "text",
+											"type": "text"
+										},
+										{
+											"key": "isbn",
+											"value": "feofdrgp243545",
+											"type": "text"
+										},
+										{
+											"key": "publisher",
+											"value": "dgsdgs",
+											"type": "text"
+										},
+										{
+											"key": "publicationDate",
+											"value": "1999-08-22",
+											"type": "text"
+										},
+										{
+											"key": "summary",
+											"value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+											"type": "text"
+										},
+										{
+											"key": "edition",
+											"value": "1st Edition",
+											"type": "text"
+										},
+										{
+											"key": "totalPages",
+											"value": "111",
+											"type": "text"
+										},
+										{
+											"key": "book_cover",
+											"type": "file",
+											"src": "/C:/Users/Work/Pictures/bg02.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/books/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"books",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "718"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2ce-vkuLsFfsr0QZXCs4RX5qDQq9Tfs\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 21:17:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Book updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Book One eddit\",\n        \"categoryId\": \"2\",\n        \"authorId\": \"1\",\n        \"language\": \"Chinese\",\n        \"contentType\": \"text\",\n        \"isbn\": \"feofdrgp243545\",\n        \"publisher\": \"dgsdgs\",\n        \"publicationDate\": \"1999-08-22T00:00:00.000Z\",\n        \"coverImage\": \"public/uploads/books/covers/29315aa0-8cf3-4374-a68a-be81cb88963c-bg02.jpg\",\n        \"coverImageUrl\": \"https://s3-library-catalogue-system.s3.ap-southeast-1.amazonaws.com/public/uploads/books/covers/29315aa0-8cf3-4374-a68a-be81cb88963c-bg02.jpg\",\n        \"summary\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n        \"edition\": \"1st Edition\",\n        \"totalPages\": \"111\",\n        \"availability\": true,\n        \"createdAt\": \"2023-12-15T21:16:30.000Z\",\n        \"updatedAt\": \"2023-12-15T21:17:16.021Z\",\n        \"deletedAt\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Book",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/books/11",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"books",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Book",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/books/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"books",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"38-IfCu0rwsZsdkwIsUCdtwf9CG1Kk\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 15 Dec 2023 18:28:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Book deleted successfully\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Members",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Member Approved By Admin",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/user/1/approve",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"user",
+										"1",
+										"approve"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Member Approved By Admin",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/admin/user/1/approve",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"admin",
+												"user",
+												"1",
+												"approve"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "438"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1b6-9kIXO/DgYguIqE60EVtVuLb3PTQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 15 Dec 2023 18:50:38 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Admin Approved Successfully.\",\n    \"data\": {\n        \"id\": 1,\n        \"firstName\": \"Kyaw Linn\",\n        \"lastName\": \"Thu\",\n        \"email\": \"kyawlinnthu.dev@gmail.com\",\n        \"password\": \"$2b$08$AMOhz19gvgClgOic8.Kuwet8Upg/Pbpsh6a1gm7lylivKntt3ezgi\",\n        \"address\": \"aaaa\",\n        \"phone\": \"09953007198\",\n        \"dob\": \"1999-03-29T00:00:00.000Z\",\n        \"accountStatus\": \"ACTIVATED\",\n        \"authToken\": null,\n        \"createdAt\": \"2023-12-15T18:41:46.000Z\",\n        \"updatedAt\": \"2023-12-15T18:50:38.700Z\",\n        \"deletedAt\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Member Rejected By Admin",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/user/2/reject",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"user",
+										"2",
+										"reject"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Member Rejected By Admin",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/admin/user/2/reject",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"admin",
+												"user",
+												"2",
+												"reject"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "60"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"3c-M+ULGD9Yu1ZhTtRMM2/vb5BYeOs\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 15 Dec 2023 18:59:40 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Member Rejected Successfully.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Member Lists with Search",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/user?page=1&pageSize=2&keyword=kyaw",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"user"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "2"
+										},
+										{
+											"key": "keyword",
+											"value": "kyaw",
+											"description": "search by firstName, lastName, email, phone"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Member Lists with Search",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/admin/user?page=1&pageSize=2&keyword=cc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"admin",
+												"user"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "2"
+												},
+												{
+													"key": "keyword",
+													"value": "cc",
+													"description": "search by firstName, lastName, email, phone"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "448"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1c0-SJC+xzd7ir6hLxLwsSkXEJvsbpU\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 15 Dec 2023 19:33:53 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Retrieved all member lists Successfully.\",\n    \"currentPage\": 1,\n    \"totalPages\": 1,\n    \"pageSize\": 2,\n    \"totalCounts\": 2,\n    \"data\": [\n        {\n            \"id\": 2,\n            \"firstName\": \"ab\",\n            \"lastName\": \"ccc\",\n            \"email\": \"aaa@gmai.com\",\n            \"phone\": \"09953007198\",\n            \"accountStatus\": \"PENDING\",\n            \"createdAt\": \"2023-12-15T18:42:06.000Z\"\n        },\n        {\n            \"id\": 3,\n            \"firstName\": \"cc\",\n            \"lastName\": \"Thu\",\n            \"email\": \"ccc@gmai.com\",\n            \"phone\": \"09953007199\",\n            \"accountStatus\": \"ACTIVATED\",\n            \"createdAt\": \"2023-12-15T18:42:52.000Z\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Member Details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/user/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Member Details",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/admin/user/1",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"admin",
+												"user",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "278"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"116-syvBBGF/13ZDNcgXEbOrY9zmNho\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 15 Dec 2023 19:35:42 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Retrieved user details successfully.\",\n    \"data\": {\n        \"id\": 1,\n        \"firstName\": \"aa\",\n        \"lastName\": \"bb\",\n        \"email\": \"bb@gmail.com\",\n        \"phone\": \"09953007200\",\n        \"address\": \"aaaa\",\n        \"dob\": \"1999-03-29T00:00:00.000Z\",\n        \"accountStatus\": \"ACTIVATED\",\n        \"createdAt\": \"2023-12-15T18:41:46.000Z\"\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Member Register By User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "firstName",
+											"value": "Kyaw Linn",
+											"type": "text"
+										},
+										{
+											"key": "lastName",
+											"value": "Thu",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "kyawlinnthu@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "@dminPass123",
+											"type": "text"
+										},
+										{
+											"key": "confirm_password",
+											"value": "@dminPass123",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "aaaa",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "09953007198",
+											"type": "text"
+										},
+										{
+											"key": "dob",
+											"value": "1999-03-29",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/user/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Member Register By User",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "firstName",
+													"value": "Kyaw Linn",
+													"type": "text"
+												},
+												{
+													"key": "lastName",
+													"value": "Thu",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "kyawlinnthu@gmail.com",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "@dminPass123",
+													"type": "text"
+												},
+												{
+													"key": "confirm_password",
+													"value": "@dminPass123",
+													"type": "text"
+												},
+												{
+													"key": "address",
+													"value": "aaaa",
+													"type": "text"
+												},
+												{
+													"key": "phone",
+													"value": "09953007198",
+													"type": "text"
+												},
+												{
+													"key": "dob",
+													"value": "1999-03-29",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{base_url}}/user/register",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "85"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"55-IyqyL36BsjZ7ITHczifzaYmc2pw\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 15 Dec 2023 18:42:52 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Register Sucess. Please Wait! we will get back to you.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Member Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "kyawlinnthu@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "@dminPass123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/user/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Member Login",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "email",
+													"value": "kyawlinnthu@gmail.com",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "@dminPass123",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{base_url}}/user/login",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"user",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "350"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"15e-p5HUm7ajeI8Pt2F6WZVsHsE89S0\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 15 Dec 2023 19:01:09 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Log In successfully.\",\n    \"data\": {\n        \"firstName\": \"Kyaw Linn\",\n        \"lastName\": \"Thu\",\n        \"email\": \"kyawlinnthu@gmail.com\",\n        \"phone\": \"09953007198\",\n        \"authToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJreWF3bGlubnRodUBnbWFpbC5jb20iLCJpYXQiOjE3MDI2NjY4MjEsImV4cCI6MTcwMjc1MzIyMX0.b7Ut92v5pevVpUS6IUu22fJzyVeQUs7LzVKj7JN2nmE\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Member Logout",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{user_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/user/logout",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"logout"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Member Logout",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{user_token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/user/logout",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"user",
+												"logout"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "50"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"32-rMlterJFLJf2V1pdg/rgf61eiKg\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 15 Dec 2023 19:03:22 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Logout Successfully\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Borrow Books",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Borrow Book",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bookIds\": [1,2,3]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/borrow/book/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"borrow",
+										"book",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Borrow Book",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"bookIds\": [1,2,3,4,5]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/admin/borrow/book/1",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"admin",
+												"borrow",
+												"book",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "58"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"3a-uyb3rEKcJLsj4J/T0kXx7TM1UlM\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Dec 2023 07:48:58 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Books successfully borrowed\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Return Books",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bookIds\": [1,2,3]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/borrow/book/return/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"borrow",
+										"book",
+										"return",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Return Books",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"bookIds\": [1,2,3,4,5]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/admin/borrow/book/return/1",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"admin",
+												"borrow",
+												"book",
+												"return",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "58"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"3a-fViZWjV2NEr+gaqKomLlNp7ZWu8\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Dec 2023 07:50:10 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Books successfully returned\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Browse Book with Filter",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/user/books/search?keyword=the&book=vol&author=on&category=horror&catalogueId=2&page=1&pageSize=2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"books",
+										"search"
+									],
+									"query": [
+										{
+											"key": "keyword",
+											"value": "the"
+										},
+										{
+											"key": "book",
+											"value": "vol"
+										},
+										{
+											"key": "author",
+											"value": "on"
+										},
+										{
+											"key": "category",
+											"value": "horror"
+										},
+										{
+											"key": "catalogueId",
+											"value": "2"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Browse Book with Filter",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/user/books/search?keyword=the&book=vol&author=on&category=horror&catalogueId=2&page=1&pageSize=2",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"user",
+												"books",
+												"search"
+											],
+											"query": [
+												{
+													"key": "keyword",
+													"value": "the"
+												},
+												{
+													"key": "book",
+													"value": "vol"
+												},
+												{
+													"key": "author",
+													"value": "on"
+												},
+												{
+													"key": "category",
+													"value": "horror"
+												},
+												{
+													"key": "catalogueId",
+													"value": "2"
+												},
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "334"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"14e-b4eAEn5d7QLLgQcvmIdDiKxWoq8\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Dec 2023 06:53:09 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Retrieved all book lists successfully.\",\n    \"currentPage\": 1,\n    \"totalPages\": 1,\n    \"pageSize\": 2,\n    \"totalCounts\": 1,\n    \"data\": [\n        {\n            \"bookId\": 8,\n            \"bookTitle\": \"The Hunger Games Vol.2\",\n            \"cover_image_url\": null,\n            \"availability\": 1,\n            \"isbn\": \"9780439023721\",\n            \"categoryId\": 2,\n            \"category_name\": \"Horror\",\n            \"authorId\": 6,\n            \"author_name\": \"Daniel Wilson\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Reserve Books",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{user_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bookIds\": [1,2,3]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/books/reserve",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"books",
+										"reserve"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Reserve Books",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{user_token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"bookIds\": [1,2,3]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/user/books/reserve",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"user",
+												"books",
+												"reserve"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "59"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"3b-hye8Na60Q3ZLULOWpiFPtGGTRMQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Dec 2023 07:06:01 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Books successfully reserved.\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

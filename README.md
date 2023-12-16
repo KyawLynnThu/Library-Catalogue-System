@@ -1,15 +1,15 @@
 # Library Catalogue System
 
-This README file provides an overview of Library Catalogue System API. Tech Stacks: NodeJS, Express, MySQL with Sequelize ORM.
+This README file provides an overview of Library Catalogue System API. Tech Stacks: NodeJS, Express, MySQL with Sequelize ORM. Can find system ERD, WorkFlow & Postman collection at root Dir.
 
 ## Features
 
 - **Admin Operations:**
   - Authentication (Login/Logout)
   - Management of categories, authors, and books
-  - Borrowing actions for members
+  - Borrowing/Retun actions for members
   - Search member data
-  - Search book by filter (by books, by category, by author)
+  - Search book by search and filter (by books, by category, by author, by catalogueId)
   - User approval/rejection
   
 - **User Operations:**
@@ -81,3 +81,7 @@ This document outlines the API endpoints available in the application.
 - `/api/v1/user/logout`: User logout
 - `/api/v1/user/books/search`: Searching functionality
 - `/api/v1/user/books/reserve`: Booking functionality
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
