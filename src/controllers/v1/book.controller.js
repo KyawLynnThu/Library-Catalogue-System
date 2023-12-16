@@ -6,7 +6,15 @@ const bookController = {
     bookService
       .index(req)
       .then((data) => {
-        responseMessage(res, data.message, data.data);
+        responseMessage(
+          res,
+          data.message,
+          data.data,
+          data.currentPage,
+          data.totalPages,
+          data.pageSize,
+          data.totalCounts,
+        );
       })
       .catch((err) => {
         next(err);

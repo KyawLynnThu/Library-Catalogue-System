@@ -1,4 +1,5 @@
 const dayjs = require('dayjs');
+const { QueryTypes } = require('sequelize');
 
 const { DataBaseModelNames } = require('../../database/constants');
 const db = require('../../database/models');
@@ -9,25 +10,94 @@ const deleteFile = require('../../helpers/delete-file.helper');
 const uploadFile = require('../../helpers/upload-file.helper');
 
 const bookService = {
-  index: async () => {
+  index: async (req) => {
     try {
-      const books = await Book.findAll({
-        where: { deletedAt: null },
-        include: [
-          {
-            model: Category,
-            as: 'category',
-            attributes: ['id', 'categoryName'],
-          },
-          {
-            model: Author,
-            as: 'author',
-            attributes: ['id', 'authorName'],
-          },
-        ],
+      let query = `
+        SELECT 
+          books.id AS bookId,
+          books.title AS bookTitle,
+          books.cover_image_url,
+          books.availability,
+          books.isbn,
+          categories.id AS categoryId,
+          categories.category_name,
+          authors.id AS authorId,
+          authors.author_name
+        FROM books
+        LEFT JOIN categories ON books.category_id = categories.id AND categories.deleted_at IS NULL
+        LEFT JOIN authors ON books.author_id = authors.id AND authors.deleted_at IS NULL
+        WHERE books.deleted_at IS NULL
+      `;
+
+      let countQuery = `
+        SELECT COUNT(*) AS total 
+        FROM books
+        LEFT JOIN categories ON books.category_id = categories.id AND categories.deleted_at IS NULL
+        LEFT JOIN authors ON books.author_id = authors.id AND authors.deleted_at IS NULL
+        WHERE books.deleted_at IS NULL
+      `;
+
+      if (req.query.keyword) {
+        const keyword = req.query.keyword;
+        query += ` AND (books.title LIKE '%${keyword}%' OR authors.author_name LIKE '%${keyword}%' OR categories.category_name LIKE '%${keyword}%')`;
+        countQuery += ` AND (books.title LIKE '%${keyword}%' OR authors.author_name LIKE '%${keyword}%' OR categories.category_name LIKE '%${keyword}%')`;
+      }
+
+      let filterConditions = [];
+
+      if (req.query.book) {
+        filterConditions.push(`books.title LIKE '%${req.query.book}%'`);
+      }
+
+      if (req.query.category) {
+        filterConditions.push(
+          `categories.category_name LIKE '%${req.query.category}%'`,
+        );
+      }
+
+      if (req.query.author) {
+        filterConditions.push(
+          `authors.author_name LIKE '%${req.query.author}%'`,
+        );
+      }
+
+      if (req.query.catalogueId) {
+        filterConditions.push(`books.category_id = ${req.query.catalogueId}`);
+      }
+
+      if (filterConditions.length > 0) {
+        query += ` AND (${filterConditions.join(' AND ')})`;
+        countQuery += ` AND (${filterConditions.join(' AND ')})`;
+      }
+
+      const totalCount = await db.sequelize.query(countQuery, {
+        type: QueryTypes.SELECT,
+        plain: true,
       });
+
+      let page = parseInt(req.query.page, 10) || 1;
+      let pageSize = parseInt(req.query.pageSize, 10) || 10;
+
+      if (req.query.pageSize) {
+        pageSize = parseInt(req.query.pageSize, 10);
+      }
+
+      let offset = (page - 1) * pageSize;
+      query += ` ORDER BY books.created_at DESC LIMIT ${pageSize} OFFSET ${offset}`;
+
+      const books = await db.sequelize.query(query, {
+        type: QueryTypes.SELECT,
+        nest: true,
+      });
+
+      const totalPages = Math.ceil(totalCount.total / pageSize);
+
       return {
         message: 'Retrieved all book lists successfully.',
+        currentPage: page,
+        totalPages: totalPages,
+        pageSize: pageSize,
+        totalCounts: totalCount.total,
         data: books,
       };
     } catch (error) {
