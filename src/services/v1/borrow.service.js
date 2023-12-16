@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const { DataBaseModelNames } = require('../../database/constants');
+const db = require('../../database/models');
 const Member = require('../../database/models')[DataBaseModelNames.MEMBER];
 const Book = require('../../database/models')[DataBaseModelNames.BOOK];
 const BookReserve = require('../../database/models')[
@@ -12,6 +13,7 @@ const BorrowRecord = require('../../database/models')[
 
 const borrowService = {
   borrowBook: async (req) => {
+    const t = await db.sequelize.transaction();
     try {
       const { memberId } = req.params;
       const { bookIds } = req.body;
@@ -53,13 +55,37 @@ const borrowService = {
         throw new Error('User has reached maximum borrowing limit');
       }
 
-      // Check Availability of books
       const books = await Book.findAll({
         where: { id: bookIds, availability: true, deletedAt: null },
       });
 
       if (books.length !== bookIds.length) {
-        throw new Error('One or more books not available or do not exist');
+        for (const bookId of bookIds) {
+          const reservedBook = await BookReserve.findOne({
+            where: {
+              bookId,
+              isAvailable: false,
+            },
+            transaction: t,
+          });
+
+          if (reservedBook) {
+            if (reservedBook.memberId === memberId) {
+              await BookReserve.destroy({
+                where: {
+                  bookId: reservedBook.bookId,
+                  isAvailable: false,
+                },
+                transaction: t,
+              });
+            } else {
+              await t.rollback();
+              throw new Error(
+                'One or more requested books are reserved by another user',
+              );
+            }
+          }
+        }
       }
 
       // Check if the user is trying to borrow more books than allowed
@@ -80,15 +106,22 @@ const borrowService = {
         dueDate: dueDate,
       }));
 
-      await BorrowRecord.bulkCreate(borrowingRecords);
+      await BorrowRecord.bulkCreate(borrowingRecords, { transaction: t });
 
       // Update book availability for all borrowed books
-      await Book.update({ availability: false }, { where: { id: bookIds } });
+      await Book.update(
+        { availability: false },
+        { where: { id: bookIds } },
+        { transaction: t },
+      );
+
+      await t.commit();
 
       return {
         message: 'Books successfully borrowed',
       };
     } catch (error) {
+      await t.rollback();
       throw new Error(error);
     }
   },
@@ -141,6 +174,17 @@ const borrowService = {
       const memberId = req.memberId;
       const { bookIds } = req.body;
 
+      // Check if the user has already reserved any books
+      const currentReservationsCount = await BookReserve.count({
+        where: { memberId, isAvailable: false },
+      });
+
+      const remainingSlots = 3 - currentReservationsCount;
+
+      if (remainingSlots <= 0) {
+        throw new Error('User has reached the maximum reservation limit');
+      }
+
       const books = await Book.findAll({
         where: {
           id: bookIds,
@@ -170,6 +214,7 @@ const borrowService = {
       const reservationRecords = bookIds.map((bookId) => ({
         memberId,
         bookId: bookId,
+        reservationDate: new Date(),
         isAvailable: false, // Mark the books as reserved
       }));
 

@@ -31,18 +31,22 @@ module.exports = async (req, _res, next) => {
           throw error;
         }
 
-        const member = await Member.findByPk(decoded.id, {
-          where: { deletedAt: null, accountStatus: 'ACTIVATED' },
-        });
-        if (!member) {
-          const error = new Error('User not found!');
-          error.statusCode = 403;
-          throw error;
+        try {
+          const member = await Member.findByPk(decoded.id, {
+            where: { deletedAt: null, accountStatus: 'ACTIVATED' },
+          });
+
+          if (!member) {
+            const error = new Error('User not found!');
+            error.statusCode = 403;
+            throw error;
+          }
+          req.memberId = member.id;
+
+          next();
+        } catch (error) {
+          next(error);
         }
-
-        req.memberId = member.id;
-
-        next();
       },
     );
   } catch (error) {

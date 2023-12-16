@@ -79,5 +79,5 @@ This document outlines the API endpoints available in the application.
 - `/api/v1/user/register`: User registration
 - `/api/v1/user/login`: User login
 - `/api/v1/user/logout`: User logout
-- `/api/v1/search`: Searching functionality
-- `/api/v1/reserve/book`: Booking functionality
+- `/api/v1/user/books/search`: Searching functionality
+- `/api/v1/user/books/reserve`: Booking functionality

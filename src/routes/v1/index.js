@@ -6,7 +6,6 @@ const bookRoute = require('./book.router');
 const borrowRoute = require('./borrow.router');
 const categoryRoute = require('./category.router');
 const memberRoute = require('./member.router');
-const searchRoute = require('./search.router');
 
 router.use('/admin', authRoute);
 router.use('/admin/categories', categoryRoute);
@@ -16,7 +15,6 @@ router.use('/admin/borrow', borrowRoute);
 router.use('/admin/user', memberRoute);
 
 router.use('/user', memberRoute);
-router.use('/search', searchRoute);
-router.use('/reserve', borrowRoute);
+router.use('/user/books', borrowRoute);
 
 module.exports = router;
