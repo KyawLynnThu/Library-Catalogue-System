@@ -25,9 +25,6 @@ module.exports = {
       return_date: {
         type: Sequelize.DATE,
       },
-      fine_amount: {
-        type: Sequelize.STRING,
-      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,

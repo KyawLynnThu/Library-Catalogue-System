@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       borrowDate: DataTypes.DATE,
       dueDate: DataTypes.DATE,
       returnDate: DataTypes.DATE,
-      fineAmount: DataTypes.STRING,
     },
     {
       sequelize,

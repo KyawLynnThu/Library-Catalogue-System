@@ -23,6 +23,37 @@ To run this application locally, follow these steps:
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/KyawLynnThu/Library-Catalogue-System.git
+   cd project_directory
+
+2. **Install Dependencies:**
+   ```bash
+   npm install
+
+3. **Environment Configuration:**
+    ```bash
+    Duplicate `.env-example` to `.env`
+    Fill in necessary credentials and configurations in the `.env` file.
+
+4. **Database Setup:**
+    ```bash
+    Connect to your MySQL database.
+    Run the following command to create the database:
+    npm run create:db
+
+5. **Database Migration:**
+    ```bash
+    To execute migration: npm run migrate:up
+    To undo migration: npm run migrate:down
+
+6. **Data Seeding:**
+    ```bash
+    To seed initial data: npm run seed
+    To undo data seeding: npm run unseed
+
+7. **Running the Project:**
+    ```bash
+    For production: npm start
+    For development: npm run dev
 
 # API Endpoints
 
@@ -39,7 +70,7 @@ This document outlines the API endpoints available in the application.
 - `/api/v1/admin/borrow/:memberId/return`: Returning books by a member
 - `/api/v1/admin/user/:memberId/approve`: Approving a user
 - `/api/v1/admin/user/:memberId/reject`: Rejecting a user
-- `/api/v1/admin/user/`: User Lists
+- `/api/v1/admin/user`: User Lists
 - `/api/v1/admin/user/:memberId`: User Details
 
 
